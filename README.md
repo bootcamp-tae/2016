@@ -2,21 +2,26 @@
 
 TOPICS:
 
-TestNG (TestNg Doc: http://testng.org/doc/documentation-main.html http://www.mkyong.com/tutorials/testng-tutorials/)
-Selenium Webdriver + Locators (Selenium Doc: http://www.seleniumhq.org/docs/)
-Assertion
-JBehave	(Jbehave Documentation: http://jbehave.org/reference/latest/ http://jbehave.org/reference/web/stable/using-selenium.html)
-Good Practices in Web Test Automation - Page Object Pattern - Asserts and data validation
+* TestNG (TestNg Doc: http://testng.org/doc/documentation-main.html http://www.mkyong.com/tutorials/testng-tutorials/)
 
+* Selenium Webdriver + Locators (Selenium Doc: http://www.seleniumhq.org/docs/)
 
-THINGS TO HAVE:
+* JBehave (Jbehave Documentation: http://jbehave.org/reference/latest/ http://jbehave.org/reference/web/stable/using-selenium.html)
 
-* Variable de entorno JAVA_HOME seteada a path de instalacion JDK 8
+* Good Practices in Web Test Automation:
 
-* Path _<Maven path>/bin_ agregado a variable de entorno PATH
+    * Page Object Pattern 
+    * Asserts and data validation
 
-* Dentro de las oficinas de Globant, el archivo de configuración de Maven en _<USER_HOME>/.m2/settings.xml_ debe tener el siguiente contenido:
+BEFORE BEGINNING TO WORK:
 
+* JDK 8 + Variable de entorno JAVA_HOME seteada a path de instalacion JDK 8
+
+* Maven + Path _<Maven_path>/bin_ agregado a variable de entorno **PATH**
+
+* Dentro de las oficinas de Globant, el archivo de configuración de Maven en _[HOME]/.m2/settings.xml_ debe tener el siguiente contenido:
+
+```xml
 <settings>
     <proxies>
         <proxy>
@@ -31,4 +36,4 @@ THINGS TO HAVE:
         </proxy>
     </proxies>
 </settings>
-
+```
