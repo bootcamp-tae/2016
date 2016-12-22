@@ -17,7 +17,7 @@ public class FlightResultsPage extends PageObjectBase {
 
     public void selectFlight(int i) {
 
-        wait.until(ExpectedConditions.visibilityOfAllElements(botonesSelect));
+        getWait().until(ExpectedConditions.visibilityOfAllElements(botonesSelect));
         clickIt(botonesSelect.get(i));
     }
 

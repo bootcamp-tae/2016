@@ -41,11 +41,11 @@ public class FlightSearchForm extends PageObjectBase {
         type(fechaSalida, this.calculate(i).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         type(fechaRegreso, this.calculate(i,i1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
-        wait.until(ExpectedConditions.elementToBeClickable(boton));
+        getWait().until(ExpectedConditions.elementToBeClickable(boton));
 
         clickIt(boton);
 
-        return new FlightResultsPage(driver);
+        return new FlightResultsPage(getDriver());
     }
 
     private LocalDateTime calculate (int f) {

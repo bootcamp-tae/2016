@@ -17,7 +17,7 @@ public class CheapTicketsHome extends PageObjectBase {
 
     public CheapTicketsHome () {
 
-        driver.navigate().to("http://www.cheaptickets.com");
+        getDriver().navigate().to("http://www.cheaptickets.com");
 
     }
 
@@ -25,7 +25,7 @@ public class CheapTicketsHome extends PageObjectBase {
 
         clickIt(flightTab);
 
-        return new FlightSearchForm(driver);
+        return new FlightSearchForm(getDriver());
     }
 
     public CheapTicketsHome (WebDriver driver) {

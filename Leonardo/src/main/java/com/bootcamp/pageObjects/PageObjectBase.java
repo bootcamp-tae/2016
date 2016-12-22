@@ -13,12 +13,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 abstract class PageObjectBase {
 
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
+
+    public void setWait(WebDriverWait wait) {
+        this.wait = wait;
+    }
+
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     protected void type (WebElement elemento, String txt) {
 
-        wait.until(ExpectedConditions.elementToBeClickable(elemento));
+        getWait().until(ExpectedConditions.elementToBeClickable(elemento));
         elemento.clear();
         elemento.sendKeys(txt);
 
@@ -26,7 +42,7 @@ abstract class PageObjectBase {
 
     protected void clickIt (WebElement elemento) {
 
-        wait.until(ExpectedConditions.elementToBeClickable(elemento));
+        getWait().until(ExpectedConditions.elementToBeClickable(elemento));
         elemento.click();
 
     }
