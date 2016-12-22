@@ -15,6 +15,7 @@ public class SuiteJunit {
         CheapTickecktHomrePage cheapTickecthomePage = new CheapTickecktHomrePage();
         FligthSearchForm fligthSearchForm = cheapTickecthomePage.clickOnFligthTab();
         FligthResultPage fligthResultPage = fligthSearchForm.doSearch("LAS", "LAX", 7, 7);
-        fligthResultPage.selectFligth(4);
+        fligthResultPage.selectFligth(4).selectFligth(4);
+
     }
 }

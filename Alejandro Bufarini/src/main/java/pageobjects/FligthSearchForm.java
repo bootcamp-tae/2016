@@ -1,5 +1,6 @@
 package pageobjects;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,12 +40,12 @@ public class FligthSearchForm extends PageObjectBase {
 
 
     public FligthResultPage doSearch(String las, String lax, int i, int i1) {
-        inputFlyingFrom.sendKeys(las);
-        inputFlyingTo.sendKeys(lax);
-        inputFlightDeparting.sendKeys(CalculateDate(i).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        inputFlightReturning.sendKeys(CalculateDate(CalculateDate(i),i1).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        btnSearch.click();
-        return new FligthResultPage(driver);
+        type(inputFlyingFrom,las);
+        type(inputFlyingTo,lax);
+        type(inputFlightDeparting, CalculateDate(i).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        type(inputFlightReturning, CalculateDate(CalculateDate(i),i1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        click(btnSearch);
+        return new FligthResultPage(getDriver());
     }
 
     private LocalDateTime CalculateDate(int days) {
