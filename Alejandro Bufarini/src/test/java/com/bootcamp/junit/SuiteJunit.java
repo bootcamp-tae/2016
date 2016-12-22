@@ -1,5 +1,8 @@
 package com.bootcamp.junit;
 
+import pageobjects.CheapTickecktHomrePage;
+import pageobjects.FligthResultPage;
+import pageobjects.FligthSearchForm;
 import org.junit.Test;
 
 /**
@@ -8,7 +11,10 @@ import org.junit.Test;
 public class SuiteJunit {
 
     @Test
-    public void test1(){
-
+    public void FligthSearch() {
+        CheapTickecktHomrePage cheapTickecthomePage = new CheapTickecktHomrePage();
+        FligthSearchForm fligthSearchForm = cheapTickecthomePage.clickOnFligthTab();
+        FligthResultPage fligthResultPage = fligthSearchForm.doSearch("LAS", "LAX", 7, 7);
+        fligthResultPage.selectFligth(4);
     }
 }
