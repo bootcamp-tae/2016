@@ -3,6 +3,9 @@ package com.bootcamp.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,9 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class FlightSearchForm extends PageObjectBase {
 
-    public FlightSearchForm(WebDriver driver){
-        super(driver);
-    }
+    public FlightSearchForm(){ super(); }
 
     @FindBy(id = "flight-origin")
     private WebElement from;
@@ -29,10 +30,14 @@ public class FlightSearchForm extends PageObjectBase {
 
 
     public FlightResultPage doSearch(String origin, String destination, int d1, int d2) {
-        from.sendKeys(origin);
-        to.sendKeys(destination);
-        departing.sendKeys(calculateDate(d1).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        returning.sendKeys(calculateDate(d1,d2).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
+        type(from, origin);
+
+        type(to, destination);
+
+        type(departing,calculateDate(d1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+
+        type(returning, calculateDate(d1,d2).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+
         button.click();
         return new FlightResultPage();
 

@@ -3,6 +3,8 @@ package com.bootcamp.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -12,13 +14,15 @@ import java.util.List;
  */
 public class FlightResultPage extends PageObjectBase {
 
-    public FlightResultPage(WebDriver driver){
-        super(driver);
+    public FlightResultPage(){
+        super();
     }
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
 
-    public void selectFlight(int i) {
+
+    public void selectFlight(int i)
+    {
         buttons.get(i).click();
     }
 }
