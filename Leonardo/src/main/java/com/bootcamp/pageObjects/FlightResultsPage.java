@@ -3,6 +3,7 @@ package com.bootcamp.pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ public class FlightResultsPage extends PageObjectBase {
 
     public void selectFlight(int i) {
 
-        // obtengo el listado completo, selecciono el de x posicion y le hago click
-        botonesSelect.get(i).click();
+        wait.until(ExpectedConditions.visibilityOfAllElements(botonesSelect));
+        clickIt(botonesSelect.get(i));
     }
 
     public FlightResultsPage (WebDriver driver) {

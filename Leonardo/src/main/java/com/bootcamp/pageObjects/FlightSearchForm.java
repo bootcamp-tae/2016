@@ -4,6 +4,7 @@ import javafx.util.converter.LocalDateTimeStringConverter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,16 +36,14 @@ public class FlightSearchForm extends PageObjectBase {
 
     public FlightResultsPage doSearch(String las, String lax, int i, int i1) {
 
-        // campos de aeropuertos/ciudades
-        origen.sendKeys(las);
-        destino.sendKeys(lax);
+        type(origen, las);
+        type(destino, lax);
+        type(fechaSalida, this.calculate(i).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        type(fechaRegreso, this.calculate(i,i1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
-        // campos de fechas
-        fechaSalida.sendKeys(this.calculate(i).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        fechaRegreso.sendKeys(this.calculate(i,i1).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
+        wait.until(ExpectedConditions.elementToBeClickable(boton));
 
-        // submit del form
-        boton.click();
+        clickIt(boton);
 
         return new FlightResultsPage(driver);
     }

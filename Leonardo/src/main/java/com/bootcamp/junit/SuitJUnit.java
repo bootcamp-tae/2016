@@ -3,6 +3,8 @@ import com.bootcamp.pageObjects.CheapTicketsHome;
 import com.bootcamp.pageObjects.FlightResultsPage;
 import com.bootcamp.pageObjects.FlightSearchForm;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by Colegio on 19/12/2016.

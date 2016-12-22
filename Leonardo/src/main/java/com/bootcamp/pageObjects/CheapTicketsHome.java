@@ -3,6 +3,8 @@ package com.bootcamp.pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 /**
@@ -21,7 +23,8 @@ public class CheapTicketsHome extends PageObjectBase {
 
     public FlightSearchForm clickOnFlightTab() {
 
-        flightTab.click();
+        clickIt(flightTab);
+
         return new FlightSearchForm(driver);
     }
 
