@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.security.Key;
 import java.time.LocalDateTime;
@@ -31,13 +32,16 @@ public class FlightSearch extends Base {
         super(driver);
     }
 
-    public FlightResult doSearch(String from, String to, int when, int until) {
-        this.from.sendKeys(from + Keys.ENTER);
-        this.to.sendKeys(to + Keys.ENTER);
-        this.when.sendKeys(calculateDate(when).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        this.until.sendKeys(calculateDate(calculateDate(when), until).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        submit.click();
-        return new FlightResult(driver);
+    public FlightResult doSearch(String f, String t, int w, int u) {
+        LocalDateTime init = calculateDate(w);
+        LocalDateTime end = calculateDate(init, u);
+
+        type(from,f);
+        type(to,t);
+        type(when,init.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        type(until,end.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        click(submit);
+        return new FlightResult(getDriver());
     }
 
     private LocalDateTime calculateDate(int a) {

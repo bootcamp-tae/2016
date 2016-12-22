@@ -3,6 +3,7 @@ package com.bootcamp.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 public class FlightResult extends Base {
@@ -15,6 +16,7 @@ public class FlightResult extends Base {
     }
 
     public void selectFlight(int p) {
-        buttons.get(p).click();
+        getWait().until(ExpectedConditions.visibilityOfAllElements(buttons));
+        click(buttons.get(p));
     }
 }

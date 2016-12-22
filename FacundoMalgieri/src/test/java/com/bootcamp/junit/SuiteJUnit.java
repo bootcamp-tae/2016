@@ -10,7 +10,7 @@ public class SuiteJUnit {
 
         CheapTickets home   = new CheapTickets();
         FlightSearch form   = home.clickOnFlightTab();
-        FlightResult result = form.doSearch("LAS", "LAX", 7, 7);
+        FlightResult result = form.doSearch("LAS", "LAX", 7, 9);
         result.selectFlight(4);
 
         /*
