@@ -1,0 +1,28 @@
+package com.bootcamp.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.time.temporal.WeekFields;
+
+/**
+ * Created by Colegio on 21/12/2016.
+ */
+public class CheapTicketHome extends PageObjectBase{
+
+    public CheapTicketHome(){
+        driver.navigate().to("https://www.cheaptickets.com/");
+    }
+
+
+    @FindBy(id = "tab-flight-tab")
+    private WebElement flightTab;
+
+    public FlightSearchForm clickOnFlightTab() {
+        flightTab.click();
+        return new FlightSearchForm();
+    }
+
+
+}
