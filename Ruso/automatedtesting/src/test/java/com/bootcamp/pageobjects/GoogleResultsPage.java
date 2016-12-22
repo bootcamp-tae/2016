@@ -1,4 +1,4 @@
-package com.bootcamp.junit.web.pages;
+package com.bootcamp.pageobjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
