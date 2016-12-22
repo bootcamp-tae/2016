@@ -13,17 +13,5 @@ public class SuiteJUnit {
         FlightResult result = form.doSearch("LAS", "LAX", 7, 7);
         result.selectFlight(4);
 
-        /*
-        ChromeDriverManager.getInstance().setup();
-        ChromeDriver browser = new ChromeDriver();
-        FirefoxDriverManager.getInstance().setup();
-        FirefoxDriver browser = new FirefoxDriver();
-        browser.get("http://www.cheaptickets.com");
-        //WebElement goButton = browser.findElement(By.name("Btnk"));//preguntar
-        WebElement textBox = browser.findElement(By.id(("lst-lb")));
-        textBox.sendKeys("something" + Keys.ENTER);
-        browser.quit();
-        */
-
     }
 }
