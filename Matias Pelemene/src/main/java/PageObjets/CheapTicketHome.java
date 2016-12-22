@@ -1,8 +1,11 @@
 package PageObjets;
 
+import org.junit.rules.ExpectedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.sql.Driver;
 
@@ -21,7 +24,9 @@ public class CheapTicketHome extends PageObjectBase {
     @FindBy(id="tab-flight-tab")
     private WebElement flightTab;
 
-    public FlightSearchForm ClickFligthTab() {
+    public FlightSearchForm ClickFlightTab() {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(flightTab));
         flightTab.click();
         return new FlightSearchForm(driver);
     }

@@ -4,6 +4,8 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,16 +16,16 @@ import java.util.Date;
  */
 public class FlightSearchForm extends PageObjectBase {
 
-    @FindBy(id = "package-origin")
+    @FindBy(id = "flight-origin")
     private WebElement inputFrom;
 
-    @FindBy(id = "package-destination")
+    @FindBy(id = "flight-destination")
     private WebElement inputTo;
 
-    @FindBy(id = "package-departing")
+    @FindBy(id="flight-departing")
     private WebElement fechaFrom;
 
-    @FindBy(id = "package-returning")
+    @FindBy(id = "flight-returning")
     private WebElement fechaTo;
 
     @FindBy(id = "search-button")
@@ -34,11 +36,11 @@ public class FlightSearchForm extends PageObjectBase {
     }
 
     public FlightResultPage DoSearch(String lax, String las, int fecha1, int fecha2) {
-        inputFrom.sendKeys(lax);
-        inputTo.sendKeys(las);
-        fechaFrom.sendKeys(this.CalculateFechas(fecha1).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        fechaTo.sendKeys(this.CalculateFechas(fecha1,fecha2).format(DateTimeFormatter.ofPattern("mm/dd/yyyy")));
-        btnSearch.click();
+        Type(inputFrom,lax);
+        Type(inputTo,las);
+        Type(fechaFrom, this.CalculateFechas(fecha1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        Type(fechaTo, this.CalculateFechas(fecha1,fecha2).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        Click(btnSearch);
         return new FlightResultPage(driver);
     }
 
