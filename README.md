@@ -2,11 +2,13 @@
 
 TOPICS:
 
-* TestNG (TestNg Doc: http://testng.org/doc/documentation-main.html http://www.mkyong.com/tutorials/testng-tutorials/)
+* JUnit - http://junit.org/junit4/
 
-* Selenium Webdriver + Locators (Selenium Doc: http://www.seleniumhq.org/docs/)
+* TestNG - http://testng.org/doc/documentation-main.html
 
-* JBehave (Jbehave Documentation: http://jbehave.org/reference/latest/ http://jbehave.org/reference/web/stable/using-selenium.html)
+* Selenium Webdriver + Locators - http://www.seleniumhq.org/docs/
+
+* JBehave - http://jbehave.org/reference/latest/
 
 * Good Practices in Web Test Automation:
 
@@ -36,4 +38,21 @@ BEFORE BEGINNING TO WORK:
         </proxy>
     </proxies>
 </settings>
+```
+
+* Configuration para plugin compilador Maven para Java 1.8
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.0</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
