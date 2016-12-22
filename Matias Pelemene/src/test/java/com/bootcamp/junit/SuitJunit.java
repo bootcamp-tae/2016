@@ -1,4 +1,8 @@
 package com.bootcamp.junit;
+
+import PageObjets.CheapTicketHome;
+import PageObjets.FlightResultPage;
+import PageObjets.FlightSearchForm;
 import org.junit.Test;
 
 /**
@@ -7,7 +11,10 @@ import org.junit.Test;
 public class SuitJunit {
 
     @Test
-    public void test1(){
-        
+    public void FlightSearch() {
+        CheapTicketHome homePage = new CheapTicketHome();
+        FlightSearchForm searchForm = homePage.ClickFligthTab();
+        FlightResultPage resultPage = searchForm.DoSearch("LAX", "LAS", 7, 7);
+        resultPage.SelectFlight(4);
     }
 }
