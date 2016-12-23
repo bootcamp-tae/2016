@@ -3,11 +3,8 @@ package PageObjets;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.internal.MouseAction;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -21,10 +18,16 @@ public class FlightResultPage extends PageObjectBase {
     }
 
     @FindBy(css="button[data-test-id='select-button']")
-    private List<WebElement> buttons;
+    private List<WebElement> botones;
+   
+    private HotelPopUp notificacionPopUp;
 
     public FlightResultPage SelectFlight(int i) {
-        Click(buttons.get(i));
-        return new FlightResultPage(driver);
+        getWait().until(ExpectedConditions.elementToBeClickable(botones.get(i)));
+        Click(botones.get(i));
+
+        notificacionPopUp = new HotelPopUp(getDriver());
+
+        return new FlightResultPage(getDriver());
     }
 }

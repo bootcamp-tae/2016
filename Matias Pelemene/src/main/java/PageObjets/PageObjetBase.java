@@ -48,4 +48,6 @@ abstract class PageObjectBase {
     protected WebDriverWait getWait() {
         return wait;
     }
+
+    protected WebDriver getDriver(){return driver; }
 }

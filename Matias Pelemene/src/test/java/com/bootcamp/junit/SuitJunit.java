@@ -15,6 +15,6 @@ public class SuitJunit {
         CheapTicketHome homePage = new CheapTicketHome();
         FlightSearchForm searchForm = homePage.ClickFlightTab();
         FlightResultPage resultPage = searchForm.DoSearch("LAX", "LAS", 7, 7);
-        resultPage.SelectFlight(4).SelectFlight(5);
+        resultPage.SelectFlight(1).SelectFlight(1);
     }
 }
