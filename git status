@@ -1,0 +1,85 @@
+[1mdiff --git a/Ruso/automatedtesting/src/test/java/com/bootcamp/junit/SuiteJUnit.java b/Ruso/automatedtesting/src/test/java/com/bootcamp/junit/SuiteJUnit.java[m
+[1mindex 87a7a8f..1eba30e 100644[m
+[1m--- a/Ruso/automatedtesting/src/test/java/com/bootcamp/junit/SuiteJUnit.java[m
+[1m+++ b/Ruso/automatedtesting/src/test/java/com/bootcamp/junit/SuiteJUnit.java[m
+[36m@@ -31,7 +31,6 @@[m [mpublic class SuiteJUnit {[m
+         FirefoxDriverManager.getInstance().setup();[m
+         ChromeDriverManager.getInstance().setup();[m
+         return Arrays.asList(new Object[][]{[m
+[31m-                {new FirefoxDriver()},[m
+                 {new ChromeDriver()}}[m
+         );[m
+     }[m
+[36m@@ -43,9 +42,9 @@[m [mpublic class SuiteJUnit {[m
+     }[m
+ [m
+     @Test[m
+[31m-    public void test1() throws InterruptedException {[m
+[32m+[m[32m    public void flightSearch() throws InterruptedException {[m
+         browser.manage().window().maximize();[m
+[31m-        browser.navigate().to("http://www.google.com");[m
+[32m+[m[32m        browser.navigate().to("https://www.cheaptickets.com/");[m
+ [m
+         GoogleHomePage home = new GoogleHomePage(browser);[m
+         GoogleResultsPage results = home.doSearch("Something");[m
+[1mdiff --git a/gabrielFranchini/pom.xml b/gabrielFranchini/pom.xml[m
+[1mindex c0ef9fc..34ae419 100644[m
+[1m--- a/gabrielFranchini/pom.xml[m
+[1m+++ b/gabrielFranchini/pom.xml[m
+[36m@@ -2,20 +2,49 @@[m
+ [m
+ <project xmlns="http://maven.apache.org/POM/4.0.0"[m
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m
+[31m-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd[m
+[31m-http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">[m
+[32m+[m[32m         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">[m
+     <modelVersion>4.0.0</modelVersion>[m
+[31m-[m
+     <groupId>com.bootcamp</groupId>[m
+[31m-    <artifactId>AutomatedTesting</artifactId>[m
+[32m+[m[32m    <artifactId>automated-testing</artifactId>[m
+     <version>1.0-SNAPSHOT</version>[m
+ [m
+     <dependencies>[m
+         <dependency>[m
+[32m+[m[32m            <groupId>junit</groupId>[m
+[32m+[m[32m            <artifactId>junit</artifactId>[m
+[32m+[m[32m            <version>4.12</version>[m
+[32m+[m[32m        </dependency>[m
+[32m+[m
+[32m+[m[32m        <dependency>[m
+             <groupId>org.testng</groupId>[m
+             <artifactId>testng</artifactId>[m
+             <version>6.8.5</version>[m
+         </dependency>[m
+[32m+[m
+[32m+[m[32m        <dependency>[m
+[32m+[m[32m            <groupId>org.seleniumhq.selenium</groupId>[m
+[32m+[m[32m            <artifactId>selenium-java</artifactId>[m
+[32m+[m[32m            <version>3.0.1</version>[m
+[32m+[m[32m        </dependency>[m
+[32m+[m
+[32m+[m[32m        <dependency>[m
+[32m+[m[32m            <groupId>io.github.bonigarcia</groupId>[m
+[32m+[m[32m            <artifactId>webdrivermanager</artifactId>[m
+[32m+[m[32m            <version>1.5.0</version>[m
+[32m+[m[32m        </dependency>[m
+     </dependencies>[m
+[32m+[m[32m    <build>[m
+[32m+[m[32m        <plugins>[m
+[32m+[m[32m            <plugin>[m
+[32m+[m[32m                <groupId>org.apache.maven.plugins</groupId>[m
+[32m+[m[32m                <artifactId>maven-compiler-plugin</artifactId>[m
+[32m+[m[32m                <version>3.6.0</version>[m
+[32m+[m[32m                <configuration>[m
+[32m+[m[32m                    <source>1.8</source>[m
+[32m+[m[32m                    <target>1.8</target>[m
+[32m+[m[32m                </configuration>[m
+ [m
+[32m+[m[32m            </plugin>[m
+[32m+[m[32m        </plugins>[m
+[32m+[m[32m    </build>[m
+ </project>[m
+\ No newline at end of file[m
+[1mdiff --git a/gabrielFranchini/src/test/java/com/bootcamp/junit/SuiteJUnit.java b/gabrielFranchini/src/test/java/com/bootcamp/junit/SuiteJUnit.java[m
+[1mindex 6b971a0

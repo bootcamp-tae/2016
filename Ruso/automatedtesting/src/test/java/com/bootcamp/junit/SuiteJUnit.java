@@ -31,7 +31,6 @@ public class SuiteJUnit {
         FirefoxDriverManager.getInstance().setup();
         ChromeDriverManager.getInstance().setup();
         return Arrays.asList(new Object[][]{
-                {new FirefoxDriver()},
                 {new ChromeDriver()}}
         );
     }
@@ -43,9 +42,9 @@ public class SuiteJUnit {
     }
 
     @Test
-    public void test1() throws InterruptedException {
+    public void flightSearch() throws InterruptedException {
         browser.manage().window().maximize();
-        browser.navigate().to("http://www.google.com");
+        browser.navigate().to("https://www.cheaptickets.com/");
 
         GoogleHomePage home = new GoogleHomePage(browser);
         GoogleResultsPage results = home.doSearch("Something");
