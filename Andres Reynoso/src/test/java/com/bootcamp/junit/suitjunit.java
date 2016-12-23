@@ -16,15 +16,14 @@ public class suitjunit {
     @Test
    public void flightSearch() {
 
-       CheapTicketHome home = new CheapTicketHome();
+        CheapTicketHome home = new CheapTicketHome();
 
-       FlightSearchForm searchForm = home.clickOnFlightTab();
+        FlightSearchForm searchForm = home.clickOnFlightTab();
 
-       searchForm.doSearch("Lax", "Las", 7, 7);
+        FlightResultPage results = searchForm.doSearch("Las", "Lax", 7, 7);
 
-       FlightResultPage results = new FlightResultPage();
+        results.selectFlight(4);
 
-       results.selectFlight(4);
-
+        //results.selectFlight(5);
    }
 }

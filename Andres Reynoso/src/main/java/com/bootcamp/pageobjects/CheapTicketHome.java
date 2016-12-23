@@ -11,20 +11,20 @@ import java.time.temporal.WeekFields;
 /**
  * Created by Colegio on 21/12/2016.
  */
-public class CheapTicketHome extends PageObjectBase{
+public class CheapTicketHome extends PageObjectBase {
 
-    public CheapTicketHome(){
+    public CheapTicketHome() {
+
         driver.navigate().to("https://www.cheaptickets.com/");
-    }
 
+    }
 
     @FindBy(id = "tab-flight-tab")
     private WebElement flightTab;
 
     public FlightSearchForm clickOnFlightTab() {
         clic(flightTab);
-        return new FlightSearchForm();
+        return new FlightSearchForm(driver);
+
     }
-
-
 }

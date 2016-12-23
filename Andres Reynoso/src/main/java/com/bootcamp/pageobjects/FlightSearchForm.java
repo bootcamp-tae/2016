@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class FlightSearchForm extends PageObjectBase {
 
-    public FlightSearchForm(){ super(); }
+    public FlightSearchForm(WebDriver driver) { super(driver); }
 
     @FindBy(id = "flight-origin")
     private WebElement from;
@@ -25,27 +25,18 @@ public class FlightSearchForm extends PageObjectBase {
     private WebElement departing;
     @FindBy(id = "flight-returning")
     private WebElement returning;
-    @FindBy (id="search-button")
+    @FindBy(id = "search-button")
     private WebElement button;
 
+    public FlightResultPage doSearch(String origin, String destination, int d1, int d2){
 
-    public FlightResultPage doSearch(String origin, String destination, int d1, int d2) {
         type(from, origin);
-
         type(to, destination);
-
-        type(departing,calculateDate(d1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-
+        type(departing, calculateDate(d1, 0).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         type(returning, calculateDate(d1,d2).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
-        button.click();
-        return new FlightResultPage();
-
-    }
-
-    private LocalDateTime calculateDate(int days) {
-
-        return LocalDateTime.now().plusDays(days);
+        clic(button);
+        return  new FlightResultPage(driver);
 
     }
 
@@ -54,6 +45,4 @@ public class FlightSearchForm extends PageObjectBase {
         return LocalDateTime.now().plusDays(days + days2);
 
     }
-
-
 }

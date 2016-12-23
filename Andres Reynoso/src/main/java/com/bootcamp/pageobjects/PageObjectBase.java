@@ -9,42 +9,72 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 /**
  * Created by Colegio on 21/12/2016.
  */
 public abstract class PageObjectBase {
 
-    protected void getWait(WebElement elementId) {
-        WebDriverWait getWait = new WebDriverWait(driver, 10);
-        getWait.until(ExpectedConditions.elementToBeClickable(elementId));
+
+    private WebDriverWait wait;
+    protected WebDriverWait getWait() {
+
+        return new WebDriverWait(driver, 10);
     }
 
-    protected void type (WebElement elementId,String text){
-        getWait(elementId);
+    protected void untilECC(WebElement elementId){
+        //Acronym until, expected,conditions, clickable
+        getWait().until(ExpectedConditions.elementToBeClickable(elementId));
+    }
+
+    protected void clic(WebElement elementId) {
+
+        untilECC(elementId);
+        elementId.click();
+    }
+
+    protected void type(WebElement elementId, String text) {
+
+        untilECC(elementId);
         elementId.clear();
         elementId.sendKeys(text);
-    }
-    
-    protected void clic(WebElement elementId) {
-        getWait(elementId);
-        clic(elementId);
+
     }
 
+    protected void untilECV(List<WebElement> elementList) {
 
+        //Acronym until, expected,conditions,visible
+        getWait().until(ExpectedConditions.visibilityOfAllElements(elementList));
+
+    }
+
+    protected void clickList(List<WebElement> elementList, int i) {
+
+        untilECV(elementList);
+        elementList.get(i).click();
+
+    }
 
     protected WebDriver driver;
 
-
     public PageObjectBase() {
-        if (driver ==null){
+        if (driver == null) {
+
             ChromeDriverManager.getInstance().setup();
             driver = new ChromeDriver();
+            wait = getWait();
+
         };
+
         PageFactory.initElements(driver, this);
+
     }
 
     public PageObjectBase(WebDriver webDriver) {
+
         driver = webDriver;
         PageFactory.initElements(driver, this);
+
     }
 }

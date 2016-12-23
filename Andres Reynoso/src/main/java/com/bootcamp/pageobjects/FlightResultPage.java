@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -14,15 +13,35 @@ import java.util.List;
  */
 public class FlightResultPage extends PageObjectBase {
 
-    public FlightResultPage(){
-        super();
-    }
+    public FlightResultPage(WebDriver driver) { super(driver); }
+
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
 
+    @FindBy(id = "forcedChoiceNoThanks")
+    private WebElement popup;
 
-    public void selectFlight(int i)
-    {
-        buttons.get(i).click();
+
+    public FlightResultPage selectFlight(int i) {
+
+        clickList(buttons, i);
+
+        //return new FlightResultPage(driver);
+
+        getWait().until(ExpectedConditions.invisibilityOfAllElements(buttons));
+
+        //clickList(buttons, i);
+
+        return new FlightResultPage(this.driver);
+
+        //this.driver(return selectFlight(j));
     }
+    /*public void selectFlight2 (int j) {
+
+        getWait().until(ExpectedConditions.invisibilityOfAllElements(buttons));
+
+        clickList(buttons, j);
+
+    }*/
+
 }
