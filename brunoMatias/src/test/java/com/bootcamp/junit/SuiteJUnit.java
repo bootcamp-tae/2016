@@ -11,7 +11,8 @@ public class SuiteJUnit {
         CheapTickets home   = new CheapTickets();
         FlightSearch form   = home.clickOnFlightTab();
         FlightResult result = form.doSearch("LAS", "LAX", 7, 7);
-        result.selectFlight(4);
+        result.selectFlight(4)
+                .selectFlight(2);
 
     }
 }
