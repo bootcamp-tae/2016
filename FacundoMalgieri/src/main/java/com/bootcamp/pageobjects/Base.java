@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 abstract public class Base {
     private WebDriver driver;
     private WebDriverWait wait;
@@ -16,7 +18,8 @@ abstract public class Base {
         if(driver == null) {
             ChromeDriverManager.getInstance().setup();
             driver = new ChromeDriver();
-            wait = new WebDriverWait(driver,30);
+            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+            wait   = new WebDriverWait(driver,30);
         }
         PageFactory.initElements(driver,this);
     }

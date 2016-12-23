@@ -34,7 +34,7 @@ public class FlightSearch extends Base {
 
     public FlightResult doSearch(String f, String t, int w, int u) {
         LocalDateTime init = calculateDate(w);
-        LocalDateTime end = calculateDate(init, u);
+        LocalDateTime end  = calculateDate(init, u);
 
         type(from,f);
         type(to,t);
