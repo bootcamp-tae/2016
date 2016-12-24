@@ -1,16 +1,22 @@
 package com.bootcamp.pageobjects;
 
+import com.google.common.base.Function;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-abstract public class Base {
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+abstract class Base {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -38,6 +44,17 @@ abstract public class Base {
 
     protected void click (WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    protected boolean exists(WebElement e) {
+        try {
+            return new FluentWait<>(e)
+                    .withTimeout(5, SECONDS)
+                    .ignoring(NoSuchElementException.class)
+                    .until((Function<WebElement, Boolean>) WebElement::isDisplayed);
+        }catch (TimeoutException err){
+            return false;
+        }
     }
 
     protected WebDriver getDriver() {

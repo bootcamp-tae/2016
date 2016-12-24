@@ -17,6 +17,7 @@ public class FlightResult extends Base {
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
     private PopUp popup;
+    private Notifier notifier;
 
     public FlightResult(WebDriver driver) {
         super(driver);
@@ -25,8 +26,19 @@ public class FlightResult extends Base {
 
     public FlightResult selectFlight(int p) {
         getWait().until(ExpectedConditions.visibilityOfAllElements(buttons));
-        if (popup.exists()) {
+        if (popup.isThere()) {
             popup.close();
+        }
+        /**
+         * The idea is to iterate through the notifier's list
+         * closing every notification spotted and saved there
+         *
+         * @return FlightResult
+         */
+        if (notifier.isThere()) {
+            for (WebElement x : notifier.getList()) {
+                notifier.close(x);
+            }
         }
         click(buttons.get(p));
         return new FlightResult(getDriver());

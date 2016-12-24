@@ -31,15 +31,8 @@ public class PopUp extends Base {
         return new FlightResult(getDriver());
     }
 
-    public boolean exists() {
-        try {
-            return new FluentWait<>(modal)
-                    .withTimeout(5, SECONDS)
-                    .ignoring(NoSuchElementException.class)
-                    .until((Function<WebElement, Boolean>) WebElement::isDisplayed);
-        }catch (TimeoutException e){
-            return false;
-        }
+    public boolean isThere() {
+        return exists(this.modal);
     }
 
 }
