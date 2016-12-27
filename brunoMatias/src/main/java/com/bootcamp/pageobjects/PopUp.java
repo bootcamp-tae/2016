@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
  * Created by Matias on 27/12/2016.
  */
 
-public class PopUp {
+public class PopUp extends Base{
 
     @FindBy(id = "xSellHotelForcedChoice")
     private WebElement popUp;
@@ -16,15 +16,13 @@ public class PopUp {
     @FindBy(id = "forcedChoiceNoThanks")
     private WebElement noThanksButton;
 
-    //public PopUp (WebDriver driver) { super(driver); }
-
     public boolean popUpYes () {
         return popUp.isDisplayed();
     }
 
-    /*public void popUpNo () {
-        Click(noThanksButton);
-    }*/
+    public void popUpNo () { Click(noThanksButton); }
+
+    public PopUp (WebDriver driver) { super(driver); }
 
 
 }
