@@ -18,9 +18,7 @@ public class FlightResultPage extends PageObjectBase {
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
 
-    @FindBy(id = "forcedChoiceNoThanks")
-    private WebElement popup;
-
+    private AddHotelPopUp hotelPopUp = new AddHotelPopUp(driver);
 
     public FlightResultPage selectFlight(int i) {
 
@@ -32,16 +30,8 @@ public class FlightResultPage extends PageObjectBase {
 
         //clickList(buttons, i);
 
-        return new FlightResultPage(this.driver);
+        return new FlightResultPage(driver);
 
         //this.driver(return selectFlight(j));
     }
-    /*public void selectFlight2 (int j) {
-
-        getWait().until(ExpectedConditions.invisibilityOfAllElements(buttons));
-
-        clickList(buttons, j);
-
-    }*/
-
 }

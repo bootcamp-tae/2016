@@ -1,21 +1,31 @@
 package com.bootcamp.pageobjects;
 
+import com.bootcamp.browser.Browser;
+import com.google.common.base.Function;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Colegio on 21/12/2016.
  */
 public abstract class PageObjectBase {
 
+
+
+    public void tearDown(Browser browser) {
+        driver.quit();
+    }
 
     private WebDriverWait wait;
     protected WebDriverWait getWait() {
@@ -58,7 +68,7 @@ public abstract class PageObjectBase {
 
     protected WebDriver driver;
 
-    public PageObjectBase() {
+   /*public PageObjectBase() {
         if (driver == null) {
 
             ChromeDriverManager.getInstance().setup();
@@ -69,7 +79,7 @@ public abstract class PageObjectBase {
 
         PageFactory.initElements(driver, this);
 
-    }
+    }*/
 
     public PageObjectBase(WebDriver webDriver) {
 
@@ -77,4 +87,22 @@ public abstract class PageObjectBase {
         PageFactory.initElements(driver, this);
 
     }
+    protected boolean exist(WebElement e) {
+        try {
+            return new FluentWait<>(e)
+                    .withTimeout(10, TimeUnit.SECONDS)
+                    .ignoring(NoSuchElementException.class)
+                    .ignoring(StaleElementReferenceException.class)
+                    .pollingEvery(500, TimeUnit.MILLISECONDS)
+                    .until((Function<WebElement, Boolean>) WebElement::isDisplayed);
+        }catch (TimeoutException ex){
+            return false;
+        }
+    }
+    /*protected void setUp(Browser browser){
+        //WebDriver driver = new RemoteWebDriver(browser.getCapabilities());
+
+        driver.manage().window().maximize();
+        driver.navigate().to("https://www.cheaptickets.com/");
+    }*/
 }

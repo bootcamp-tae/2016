@@ -2,6 +2,7 @@ package com.bootcamp.junit;
 import com.bootcamp.pageobjects.CheapTicketHome;
 import com.bootcamp.pageobjects.FlightResultPage;
 import com.bootcamp.pageobjects.FlightSearchForm;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -22,8 +23,7 @@ public class suitjunit {
 
         FlightResultPage results = searchForm.doSearch("Las", "Lax", 7, 7);
 
-        results.selectFlight(4);
+        results.selectFlight(4).selectFlight(2);
 
-        //results.selectFlight(5);
    }
 }

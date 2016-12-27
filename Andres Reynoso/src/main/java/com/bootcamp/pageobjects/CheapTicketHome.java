@@ -13,14 +13,18 @@ import java.time.temporal.WeekFields;
  */
 public class CheapTicketHome extends PageObjectBase {
 
-    public CheapTicketHome() {
+    /*public CheapTicketHome() {
 
         driver.navigate().to("https://www.cheaptickets.com/");
 
-    }
+    }*/
 
     @FindBy(id = "tab-flight-tab")
     private WebElement flightTab;
+
+    public CheapTicketHome(WebDriver webDriver) {
+        super(webDriver);
+    }
 
     public FlightSearchForm clickOnFlightTab() {
         clic(flightTab);
