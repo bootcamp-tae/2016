@@ -20,11 +20,11 @@ public class FlightResultsPage extends PageObjectBase {
         PopUp pop = new PopUp(getDriver());
 
         getWait().until(ExpectedConditions.visibilityOfAllElements(botonesSelect));
-
+        /*
         if (pop.isVisible()) {
             pop.dismiss();
         }
-
+        */
         clickIt(botonesSelect.get(i));
 
         return new FlightResultsPage(getDriver());

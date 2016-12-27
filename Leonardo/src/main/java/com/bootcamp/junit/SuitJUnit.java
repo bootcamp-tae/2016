@@ -14,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -29,18 +30,17 @@ public class SuitJUnit {
         this.browser = browser;
     }
 
-    @Parameters(name = "{index}:Browser[{0}]")
-    public static Iterable<Object[]> data() {
+    @Parameterized.Parameters(name = "{index}:Browser[{0}]")
+    public static Collection<Object[]> data() {
         ChromeDriverManager.getInstance().setup();
         return Arrays.asList(new Object[][]{
-                {new ChromeDriver()}}
-        );
+                {new ChromeDriver()}
+        });
     }
 
     @Before
     public void setUp () {
-        browser.manage().window().fullscreen();
-        browser.navigate().to("http://wwww.cheaptickets.com");
+        browser.navigate().to("http://www.cheaptickets.com");
     }
 
     @After
@@ -63,7 +63,7 @@ public class SuitJUnit {
         // elijo el 4to elemento dentro del page object
         FlightResultsPage nuevo = result.selectFlight(4);
 
-        nuevo.selectFlight(6);
+        //nuevo.selectFlight(6);
 
         Thread.sleep(3000);
 
