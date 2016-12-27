@@ -20,23 +20,20 @@ public class FligthResultPage extends PageObjectBase {
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> btnsSelectFligths;
 
-    @FindBy(css = "[class='notification-text']")
-    private List<WebElement> notificaciones;
-
-
     public FligthResultPage(WebDriver driver) {
         super(driver);
     }
 
     public FligthResultPage selectFligth(int i) {
+        Notifer notifer= new Notifer(getDriver());
+        Popup popup = new Popup(getDriver());
+        if (notifer.getCantidadNotificaciones() != 1) {
+            notifer.waitCloseNotifers();
+        }
         getWait().until(visibilityOfAllElements(btnsSelectFligths));
         click(btnsSelectFligths.get(i - 1));
-        if (notificaciones.size() != 1) {
-            getWait().until(visibilityOfAllElements(notificaciones));
-            for (int a = 0; a < notificaciones.size(); a++) {
-                notificaciones.get(a).findElement(By.cssSelector("[class='icon icon-close']"));
-            }
-            getWait().until(invisibilityOfAllElements(notificaciones));
+        if(getWait().until(not(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("[class='modal-inner']"))))){
+            popup.ClickNoThanks();
         }
         return new FligthResultPage(getDriver());
     }
