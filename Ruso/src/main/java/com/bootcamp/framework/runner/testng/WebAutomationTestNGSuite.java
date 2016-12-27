@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 /**
+ * Base test class for all TestNG based test suites.
+ *
  * @author Juan Krzemien
  */
 public class WebAutomationTestNGSuite<T extends PageObjectBase> extends GenericWebAutomationTest<T> {

@@ -15,6 +15,8 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 /**
+ * Base test class for all JUnit based test suites.
+ *
  * @author Juan Krzemien
  */
 

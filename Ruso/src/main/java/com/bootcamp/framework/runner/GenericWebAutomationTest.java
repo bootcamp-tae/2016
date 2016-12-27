@@ -13,19 +13,21 @@ import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
+ * Generic (not JUnit/TestNG specific) class that all test runners inherit from.
+ * <p>
+ * Contains common code that initializes the first page object instance just by extending this parameterized class.
+ * <p>
+ * Contains methdos setUp and tearDown that must be called from sub-classes.
+ *
  * @author Juan Krzemien
  */
-public class GenericWebAutomationTest<T extends PageObjectBase> implements Logging {
-
-    private static final ThreadLocal<PageObjectBase> STARTING_PAGE = new ThreadLocal<>();
+public abstract class GenericWebAutomationTest<T extends PageObjectBase> implements Logging {
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(Selenium.SERVER::stop));
     }
 
-    public GenericWebAutomationTest() {
-        getLogger().debug(format("Creating instance of [%s]...", getClass().getSimpleName()));
-    }
+    private T startingPage;
 
     /**
      * Calculates the value of parameter type "T" of this WebAutomationJUnitSuite instance.
@@ -35,13 +37,13 @@ public class GenericWebAutomationTest<T extends PageObjectBase> implements Loggi
      * @return parameter type "T" of this WebAutomationJUnitSuite instance
      */
     @SuppressWarnings("unchecked")
-    protected Class<T> getParameterizedType() {
+    private Class<T> getParameterizedType() {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     @SuppressWarnings("unchecked")
     protected T getStartingPage() {
-        return (T) STARTING_PAGE.get();
+        return startingPage;
     }
 
     public void setUp(Browser browser) {
@@ -54,10 +56,11 @@ public class GenericWebAutomationTest<T extends PageObjectBase> implements Loggi
 
         // Instantiate Page Object calculated from parameterized type...
         // This is equal to: new PageObjectType(driver);
+        Class<T> pageObjectType = getParameterizedType();
         try {
-            STARTING_PAGE.set(getParameterizedType().getConstructor(WebDriver.class).newInstance(driver));
+            this.startingPage = pageObjectType.getConstructor(WebDriver.class).newInstance(driver);
         } catch (Exception e) {
-            e.printStackTrace();
+            getLogger().error(format("Could not instantiate Page Object [%s]...", pageObjectType.getName()), e);
         }
 
         /*
@@ -68,9 +71,8 @@ public class GenericWebAutomationTest<T extends PageObjectBase> implements Loggi
 
     public void tearDown() {
         getLogger().debug("Tearing down browser...");
-        T page = getStartingPage();
-        if (page != null) {
-            page.dispose();
+        if (startingPage != null) {
+            startingPage.dispose();
         }
     }
 

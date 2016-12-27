@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import java.util.logging.LogManager;
 
 /**
+ * Starts and stops Selenium Server programmatically (Stand Alone mode, not Grid)
+ *
  * @author Juan Krzemien
  */
 public enum Selenium {

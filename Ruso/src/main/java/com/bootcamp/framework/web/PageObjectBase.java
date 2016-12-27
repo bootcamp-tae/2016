@@ -9,6 +9,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 /**
+ * Abstract class that every Page Object must inherit.
+ *
  * @author Juan Krzemien
  */
 public abstract class PageObjectBase {

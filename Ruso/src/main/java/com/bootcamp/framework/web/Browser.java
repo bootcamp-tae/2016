@@ -8,6 +8,10 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
+ * Enumeration defining which browsers we support/work on.
+ *
+ * At the same time, we are adding the capabilities of each browser to its definition.
+ *
  * @author Juan Krzemien
  */
 public enum Browser {
