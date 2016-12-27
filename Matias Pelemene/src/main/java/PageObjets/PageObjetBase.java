@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 abstract class PageObjectBase {
 
     protected WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriverWait wait;
     private static final int TIME_OUT_IN_SECONDS = 30;
 
 

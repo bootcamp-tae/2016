@@ -19,15 +19,21 @@ public class FlightResultPage extends PageObjectBase {
 
     @FindBy(css="button[data-test-id='select-button']")
     private List<WebElement> botones;
-   
-    private HotelPopUp notificacionPopUp;
+    private By notifications = By.cssSelector("div.notifications");
+    //private By popUpNoThanks = By.id("id=forcedChoiceNoThanks");
 
-    public FlightResultPage SelectFlight(int i) {
+    public FlightResultPage SelectFlightOrigin(int i) {
         getWait().until(ExpectedConditions.elementToBeClickable(botones.get(i)));
+        wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(notifications)));
+        Click(botones.get(i));
+        wait.until(ExpectedConditions.stalenessOf(botones.get(i)));
+        return new FlightResultPage(getDriver());
+    }
+
+    public void SelectFlightReturn(int i) {
+        wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(notifications)));
+        wait.until(ExpectedConditions.elementToBeClickable(botones.get(i)));
         Click(botones.get(i));
 
-        notificacionPopUp = new HotelPopUp(getDriver());
-
-        return new FlightResultPage(getDriver());
     }
 }
