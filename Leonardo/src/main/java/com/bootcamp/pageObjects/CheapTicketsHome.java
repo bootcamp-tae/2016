@@ -15,12 +15,6 @@ public class CheapTicketsHome extends PageObjectBase {
     @FindBy (id = "tab-flight-tab")
     private WebElement flightTab;
 
-    public CheapTicketsHome () {
-
-        getDriver().navigate().to("http://www.cheaptickets.com");
-
-    }
-
     public FlightSearchForm clickOnFlightTab() {
 
         clickIt(flightTab);

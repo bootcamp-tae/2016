@@ -15,10 +15,19 @@ public class FlightResultsPage extends PageObjectBase {
     @FindBy (css = "button[data-test-id='select-button']")
     private List<WebElement> botonesSelect;
 
-    public void selectFlight(int i) {
+    public FlightResultsPage selectFlight(int i) {
+
+        PopUp pop = new PopUp(getDriver());
 
         getWait().until(ExpectedConditions.visibilityOfAllElements(botonesSelect));
+
+        if (pop.isVisible()) {
+            pop.dismiss();
+        }
+
         clickIt(botonesSelect.get(i));
+
+        return new FlightResultsPage(getDriver());
     }
 
     public FlightResultsPage (WebDriver driver) {

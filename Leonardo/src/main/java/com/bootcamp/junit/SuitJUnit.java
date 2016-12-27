@@ -1,21 +1,58 @@
 package com.bootcamp.junit;
+import com.beust.jcommander.Parameters;
 import com.bootcamp.pageObjects.CheapTicketsHome;
 import com.bootcamp.pageObjects.FlightResultsPage;
 import com.bootcamp.pageObjects.FlightSearchForm;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Created by Colegio on 19/12/2016.
  */
+@RunWith(Parameterized.class)
+
 public class SuitJUnit {
 
+    private WebDriver browser;
+
+    public SuitJUnit (WebDriver browser) {
+        this.browser = browser;
+    }
+
+    @Parameters(name = "{index}:Browser[{0}]")
+    public static Iterable<Object[]> data() {
+        ChromeDriverManager.getInstance().setup();
+        return Arrays.asList(new Object[][]{
+                {new ChromeDriver()}}
+        );
+    }
+
+    @Before
+    public void setUp () {
+        browser.manage().window().fullscreen();
+        browser.navigate().to("http://wwww.cheaptickets.com");
+    }
+
+    @After
+    public void tearDown () {
+        browser.quit();
+    }
+
     @Test
-    public void flightSearch () {
+    public void flightSearch () throws InterruptedException {
 
         // instancia que se encuentra en el home (PageObject)
-        CheapTicketsHome home = new CheapTicketsHome ();
+        CheapTicketsHome home = new CheapTicketsHome (browser);
 
         // seleccion del tab flight y lo almaceno (PageObject)
         FlightSearchForm searchForm = home.clickOnFlightTab();
@@ -24,7 +61,11 @@ public class SuitJUnit {
         FlightResultsPage result = searchForm.doSearch("LAS", "LAX", 7, 7);
 
         // elijo el 4to elemento dentro del page object
-        result.selectFlight(4);
+        FlightResultsPage nuevo = result.selectFlight(4);
+
+        nuevo.selectFlight(6);
+
+        Thread.sleep(3000);
 
     }
 }
