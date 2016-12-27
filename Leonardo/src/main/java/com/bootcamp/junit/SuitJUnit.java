@@ -11,11 +11,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Colegio on 19/12/2016.
@@ -40,6 +42,8 @@ public class SuitJUnit {
 
     @Before
     public void setUp () {
+        browser.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        browser.manage().window().maximize();
         browser.navigate().to("http://www.cheaptickets.com");
     }
 
@@ -63,9 +67,7 @@ public class SuitJUnit {
         // elijo el 4to elemento dentro del page object
         FlightResultsPage nuevo = result.selectFlight(4);
 
-        //nuevo.selectFlight(6);
-
-        Thread.sleep(3000);
+        nuevo.selectFlight(6);
 
     }
 }
