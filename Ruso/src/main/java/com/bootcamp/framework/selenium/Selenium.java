@@ -23,7 +23,11 @@ public enum Selenium {
         LogManager.getLogManager().getLogger("").setLevel(java.util.logging.Level.OFF);
 
         // Start Selenium Server programmatically
-        seleniumServer.boot();
+        try {
+            seleniumServer.boot();
+        } catch (RuntimeException re) {
+            System.out.println("Selenum Server already running. Reusing...");
+        }
     }
 
     public void stop() {

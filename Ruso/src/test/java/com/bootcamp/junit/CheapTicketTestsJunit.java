@@ -1,7 +1,6 @@
 package com.bootcamp.junit;
 
-import com.bootcamp.framework.junit.WebAutomationJUnitSuite;
-import com.bootcamp.framework.web.Browser;
+import com.bootcamp.framework.runner.junit.WebAutomationJUnitSuite;
 import com.bootcamp.pageobjects.CheapTicketsHome;
 import com.bootcamp.pageobjects.FlightResultsPage;
 import com.bootcamp.pageobjects.FlightSearchForm;
@@ -13,10 +12,6 @@ import org.junit.Test;
  * @author Juan Krzemien
  */
 public class CheapTicketTestsJunit extends WebAutomationJUnitSuite<CheapTicketsHome> {
-
-    public CheapTicketTestsJunit(Browser browser) {
-        super(browser);
-    }
 
     @Test
     public void flightSearch() {

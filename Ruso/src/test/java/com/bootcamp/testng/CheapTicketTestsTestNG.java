@@ -1,11 +1,9 @@
 package com.bootcamp.testng;
 
-import com.bootcamp.framework.testng.WebAutomationTestNGSuite;
-import com.bootcamp.framework.web.Browser;
+import com.bootcamp.framework.runner.testng.WebAutomationTestNGSuite;
 import com.bootcamp.pageobjects.CheapTicketsHome;
 import com.bootcamp.pageobjects.FlightResultsPage;
 import com.bootcamp.pageobjects.FlightSearchForm;
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
@@ -15,12 +13,7 @@ import org.testng.annotations.Test;
  */
 public class CheapTicketTestsTestNG extends WebAutomationTestNGSuite<CheapTicketsHome> {
 
-    @Factory(dataProvider = "browsers")
-    public CheapTicketTestsTestNG(Browser browser) {
-        super(browser);
-    }
-
-    @Test(threadPoolSize = 5)
+    @Test
     public void flightSearch() {
         CheapTicketsHome home = getStartingPage();
 

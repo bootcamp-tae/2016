@@ -1,5 +1,6 @@
 package com.bootcamp.framework.runner;
 
+import com.bootcamp.framework.logging.Logging;
 import com.bootcamp.framework.selenium.Selenium;
 import com.bootcamp.framework.web.Browser;
 import com.bootcamp.framework.web.PageObjectBase;
@@ -8,12 +9,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.lang.reflect.ParameterizedType;
 
+import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * @author Juan Krzemien
  */
-public class GenericWebAutomationTest<T extends PageObjectBase> {
+public class GenericWebAutomationTest<T extends PageObjectBase> implements Logging {
 
     private static final ThreadLocal<PageObjectBase> STARTING_PAGE = new ThreadLocal<>();
 
@@ -21,11 +23,8 @@ public class GenericWebAutomationTest<T extends PageObjectBase> {
         Runtime.getRuntime().addShutdownHook(new Thread(Selenium.SERVER::stop));
     }
 
-    private final Browser browser;
-
-    public GenericWebAutomationTest(Browser browser) {
-        System.out.println("Creating " + getClass().getSimpleName() + " instance with browser " + browser);
-        this.browser = browser;
+    public GenericWebAutomationTest() {
+        getLogger().debug(format("Creating instance of [%s]...", getClass().getSimpleName()));
     }
 
     /**
@@ -45,7 +44,9 @@ public class GenericWebAutomationTest<T extends PageObjectBase> {
         return (T) STARTING_PAGE.get();
     }
 
-    public void setUp() {
+    public void setUp(Browser browser) {
+        getLogger().debug(format("Creating instance of [%s] with browser [%s]...", getClass().getSimpleName(), browser));
+
         // Create the driver to inject into Page Object...
         WebDriver driver = new RemoteWebDriver(browser.getCapabilities());
         driver.manage().timeouts().implicitlyWait(1, SECONDS);
@@ -66,6 +67,7 @@ public class GenericWebAutomationTest<T extends PageObjectBase> {
     }
 
     public void tearDown() {
+        getLogger().debug("Tearing down browser...");
         T page = getStartingPage();
         if (page != null) {
             page.dispose();

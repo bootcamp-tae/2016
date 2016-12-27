@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel test suite" parallel="tests">
+
+    <test name="Firefox Tests">
+        <parameter name="browser" value="FIREFOX"/>
+        <packages>
+            <package name="com.bootcamp.testng"/>
+        </packages>
+    </test>
+
+    <test name="Chrome Tests">
+        <parameter name="browser" value="CHROME"/>
+        <packages>
+            <package name="com.bootcamp.testng"/>
+        </packages>
+    </test>
+
+    <test name="Internet Explorer Tests">
+        <parameter name="browser" value="IE"/>
+        <packages>
+            <package name="com.bootcamp.testng"/>
+        </packages>
+    </test>
+
+</suite>
