@@ -1,4 +1,8 @@
-package java.com.bootcamp.pageobjects;
+package com.bootcamp.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by Matias on 27/12/2016.

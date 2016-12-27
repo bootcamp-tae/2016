@@ -2,7 +2,17 @@ package com.bootcamp.junit;
 import com.bootcamp.pageobjects.CheapTickets;
 import com.bootcamp.pageobjects.FlightResult;
 import com.bootcamp.pageobjects.FlightSearch;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 @RunWith(Parameterized.class)
 
@@ -10,7 +20,7 @@ public class SuiteJUnit {
 
     private WebDriver browser;
 
-    public SuitJUnit (WebDriver browser) {
+    public SuiteJUnit (WebDriver browser) {
         this.browser = browser;
     }
 
@@ -40,8 +50,6 @@ public class SuiteJUnit {
         FlightResult result = form.doSearch("LAS", "LAX", 7, 7);
         result.selectFlight(4)
                 .selectFlight(2);
-        Thread.sleep(5000);
-
     }
 
 

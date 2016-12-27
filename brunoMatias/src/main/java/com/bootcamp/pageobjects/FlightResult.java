@@ -29,13 +29,6 @@ public class FlightResult extends Base {
         wait.until(ExpectedConditions.visibilityOfAllElements(buttons));
         Click(buttons.get(p));
 
-        try{
-            wait.until(ExpectedConditions.visibilityOf(popUp));
-            Click(noThanksButton);
-        }
-        catch (TimeoutException e){
-        }
-
         return new FlightResult(driver);
     }
 }
