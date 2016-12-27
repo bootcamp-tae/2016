@@ -16,6 +16,12 @@ public class FlightResult extends Base {
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
 
+    @FindBy(id = "xSellHotelForcedChoice")
+    private WebElement popUp;
+
+    @FindBy(id = "forcedChoiceNoThanks")
+    private WebElement noThanksButton;
+
     @FindBy(id = "FlightUDPBookNowButton1")
     private WebElement continueBooking;
 
