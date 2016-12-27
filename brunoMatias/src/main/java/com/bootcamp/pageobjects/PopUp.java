@@ -16,15 +16,15 @@ public class PopUp {
     @FindBy(id = "forcedChoiceNoThanks")
     private WebElement noThanksButton;
 
-    public PopUp (WebDriver driver) { super(driver); }
+    //public PopUp (WebDriver driver) { super(driver); }
 
     public boolean popUpYes () {
         return popUp.isDisplayed();
     }
 
-    public void popUpNo () {
+    /*public void popUpNo () {
         Click(noThanksButton);
-    }
+    }*/
 
 
 }

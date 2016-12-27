@@ -3,6 +3,7 @@ import com.bootcamp.pageobjects.CheapTickets;
 import com.bootcamp.pageobjects.FlightResult;
 import com.bootcamp.pageobjects.FlightSearch;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,11 +26,14 @@ public class SuiteJUnit {
         this.browser = browser;
     }
 
-    @Parameterized.Parameters(name = "{index}:brws[{0}]")
+    @Parameterized.Parameters(name = "{}:[{0}]")
     public static Collection<Object[]> data() {
         ChromeDriverManager.getInstance().setup();
+        FirefoxDriverManager.getInstance().setup();
         return Arrays.asList(new Object[][]{
-                {new ChromeDriver()}
+                {new ChromeDriver()},
+                {new FirefoxDriver()}
+
         });
     }
 
