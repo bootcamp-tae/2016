@@ -1,17 +1,29 @@
 package com.bootcamp.junit;
+import com.bootcamp.framework.runner.junit.WebAutomationJUnitSuite;
 import com.bootcamp.pageobjects.CheapTickets;
 import com.bootcamp.pageobjects.FlightResult;
 import com.bootcamp.pageobjects.FlightSearch;
-import com.bootcamp.pageobjects.PopUp;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class SuiteJUnit {
+import java.util.Arrays;
+
+public class SuiteJUnit extends WebAutomationJUnitSuite<CheapTickets> {
+
     @Test
-    public void FlightSearch() {
-        CheapTickets home    = new CheapTickets();
-        FlightSearch form    = home.clickOnFlightTab();
-        FlightResult result  = form.doSearch("LAS", "LAX", 7, 9);
+    public void FlightSearch() throws InterruptedException {
+        CheapTickets home = getStartingPage();
+        FlightSearch form = home.clickOnFlightTab();
+        FlightResult result = form.doSearch("LAS", "LAX", 7, 9);
         FlightResult result2 = result.selectFlight(4);
         result2.selectFlight(2);
     }
+
 }

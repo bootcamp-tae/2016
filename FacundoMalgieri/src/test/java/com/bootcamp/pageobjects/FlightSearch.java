@@ -1,18 +1,14 @@
 package com.bootcamp.pageobjects;
 
-import org.openqa.selenium.Keys;
+import com.bootcamp.framework.web.PageObjectBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-public class FlightSearch extends Base {
+public class FlightSearch extends PageObjectBase {
     @FindBy(id = "flight-origin")
     private WebElement from;
 

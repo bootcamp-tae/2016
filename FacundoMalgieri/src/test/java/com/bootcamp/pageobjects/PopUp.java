@@ -1,20 +1,11 @@
 package com.bootcamp.pageobjects;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
+import com.bootcamp.framework.web.PageObjectBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-public class PopUp extends Base {
+public class PopUp extends PageObjectBase {
 
     @FindBy(id = "xSellHotelForcedChoice")
     private WebElement modal;
