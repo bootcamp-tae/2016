@@ -36,7 +36,7 @@ public class FlightSearchForm extends PageObjectBase {
         type(returning, calculateDate(d1,d2).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
         clic(button);
-        return  new FlightResultPage(driver);
+        return  new FlightResultPage(getDriver());
 
     }
 

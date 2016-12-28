@@ -12,18 +12,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by Colegio on 19/12/2016.
  */
-public class suitjunit {
+public class suitjunit extends WASuitJUNit<CheapTicketHome> {
+
+    private WebDriver driver;
 
     @Test
-   public void flightSearch() {
+    public void flightSearch() {
 
-        CheapTicketHome home = new CheapTicketHome();
+        CheapTicketHome home = getPage();
 
         FlightSearchForm searchForm = home.clickOnFlightTab();
 
         FlightResultPage results = searchForm.doSearch("Las", "Lax", 7, 7);
 
-        results.selectFlight(4).selectFlight(2);
+        results.selectFlight(4).selectFlightBack(2);
 
-   }
+    }
 }

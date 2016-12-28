@@ -20,17 +20,14 @@ import java.util.concurrent.TimeUnit;
  * Created by Colegio on 21/12/2016.
  */
 public abstract class PageObjectBase {
-
-
-
-    public void tearDown(Browser browser) {
-        driver.quit();
-    }
-
     private WebDriverWait wait;
+
+    private final WebDriver driver;
+
     protected WebDriverWait getWait() {
 
         return new WebDriverWait(driver, 10);
+
     }
 
     protected void untilECC(WebElement elementId){
@@ -66,43 +63,48 @@ public abstract class PageObjectBase {
 
     }
 
-    protected WebDriver driver;
-
    /*public PageObjectBase() {
         if (driver == null) {
-
             ChromeDriverManager.getInstance().setup();
             driver = new ChromeDriver();
             wait = getWait();
-
         };
-
         PageFactory.initElements(driver, this);
-
     }*/
 
-    public PageObjectBase(WebDriver webDriver) {
+    protected PageObjectBase(WebDriver driver) {
 
-        driver = webDriver;
+        this.driver = driver;
         PageFactory.initElements(driver, this);
 
     }
+
+    protected WebDriver getDriver() {
+
+        return driver;
+
+    }
+
+    public void closeDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
     protected boolean exist(WebElement e) {
         try {
+
             return new FluentWait<>(e)
                     .withTimeout(10, TimeUnit.SECONDS)
                     .ignoring(NoSuchElementException.class)
                     .ignoring(StaleElementReferenceException.class)
                     .pollingEvery(500, TimeUnit.MILLISECONDS)
                     .until((Function<WebElement, Boolean>) WebElement::isDisplayed);
-        }catch (TimeoutException ex){
+
+        }catch (TimeoutException tex){
+
             return false;
+
         }
     }
-    /*protected void setUp(Browser browser){
-        //WebDriver driver = new RemoteWebDriver(browser.getCapabilities());
-
-        driver.manage().window().maximize();
-        driver.navigate().to("https://www.cheaptickets.com/");
-    }*/
 }

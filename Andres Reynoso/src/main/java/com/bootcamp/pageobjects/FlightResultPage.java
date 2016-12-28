@@ -1,5 +1,6 @@
 package com.bootcamp.pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,25 +14,39 @@ import java.util.List;
  */
 public class FlightResultPage extends PageObjectBase {
 
-    public FlightResultPage(WebDriver driver) { super(driver); }
+    public FlightResultPage(WebDriver driver) {super(driver);}
+
+    private AddHotelPopUp hotelPopUp = new AddHotelPopUp(getDriver());
 
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
 
-    private AddHotelPopUp hotelPopUp = new AddHotelPopUp(driver);
-
     public FlightResultPage selectFlight(int i) {
 
-        clickList(buttons, i);
+        selectFlightClickPopUp(buttons.get(i));
+        return new FlightResultPage(getDriver());
 
-        //return new FlightResultPage(driver);
+    }
 
-        getWait().until(ExpectedConditions.invisibilityOfAllElements(buttons));
+    public FlightResultPage selectFlightBack(int i) {
 
-        //clickList(buttons, i);
+        selectFlightClickPopUp(buttons.get(i));
+        return this;
 
-        return new FlightResultPage(driver);
+    }
 
-        //this.driver(return selectFlight(j));
+    private final By notifications = By.cssSelector("div.notification");
+
+    protected void selectFlightClickPopUp (WebElement element){
+        if (hotelPopUp.isPopUp()) {
+            hotelPopUp.popUpClose();
+        }
+        getWait().until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(notifications)));
+        super.clic(element);
+
+
+        if (hotelPopUp.isPopUp()) {
+            hotelPopUp.popUpClose();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.bootcamp.junit;
 
+import com.bootcamp.GenericTest;
 import com.bootcamp.browser.Browser;
 import com.bootcamp.pageobjects.PageObjectBase;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
@@ -24,56 +25,55 @@ import java.util.stream.Collectors;
  */
 
 @RunWith(Parameterized.class)
-public abstract class WASuitJUNit extends PageObjectBase {
+public abstract class WASuitJUNit<T extends PageObjectBase> extends GenericTest<T> {
 
     @Parameterized.Parameter
     public Browser currentBrowser;
 
-    /*@Parameterized.Parameters(name = "Browser[0]")
-    public static Set<Browser> getBrowser() {
-        return Arrays.stream(Browser.values()).collect(Collectors.toSet());
-    }*/
-    private WebDriver browser;
+    public static Set<Browser> getBrowsers() {
 
-    public WASuitJUNit(WebDriver browser) {
-        super(browser);
-        this.browser = browser;
+        return Arrays.stream(Browser.values()).collect(Collectors.toSet());
+
     }
 
-    @Parameterized.Parameters(name = "{index} : Browser[{0}]")
-    public static Iterator<Object[]> data() {
+    @Before
+    public void setUp() {
 
+        super.setUp(currentBrowser);
+
+    }
+
+    public void tearDown() {
+
+        super.tearDown();
+
+    }
+
+    /*public WASuitJunit(WebDriver driver) {
+        super(driver);
+        this.driver = driver;
+    }
+    @Parameterized.Parameters(name = "{index} : Browser[{0}]")
+    public static Collection<Object[]> data() {
         ChromeDriverManager.getInstance().setup();
-        FirefoxDriverManager.getInstance().setup();
-        InternetExplorerDriverManager.getInstance().setup();
+        //FirefoxDriverManager.getInstance().setup();
+        //InternetExplorerDriverManager.getInstance().setup();
         return Arrays.asList(new Object[][]{
-                {new Firefox()},
-                {new InternetExplorer()},
+                //{new Firefox()},
+                //{new InternetExplorer()},
                 {new ChromeDriver()}}
         );
     }
-
+    @Before
     public void setUp() {
-        driver.navigate().to("https://www.cheaptickets.com");
         driver.manage().window().maximize();
-    }
-
-    public void tearDown() {
-        driver.quit();
-    }
-}
-
-
-
-
-    /*@Before
-    public void setUp(){
-       super.setUp();
-
+        driver.navigate().to(CHEAPTICKETS_URL);
     }
     @After
     public void tearDown() {
-        super.tearDown();
+        driver.quit();
     }*/
+}
+
 
 
