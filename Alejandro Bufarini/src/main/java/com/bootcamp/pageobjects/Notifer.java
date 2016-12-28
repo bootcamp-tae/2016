@@ -1,4 +1,4 @@
-package pageobjects;
+package com.bootcamp.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,9 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfAllElements;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElements;
 
 /**
  * Created by Colegio on 27/12/2016.

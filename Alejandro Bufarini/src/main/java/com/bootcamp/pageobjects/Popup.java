@@ -1,10 +1,8 @@
-package pageobjects;
+package com.bootcamp.pageobjects;
 
-import com.google.common.base.Predicate;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 

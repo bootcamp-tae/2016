@@ -1,11 +1,10 @@
-package pageobjects;
+package com.bootcamp.pageobjects;
 
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -32,7 +31,8 @@ public class FligthResultPage extends PageObjectBase {
         }
         getWait().until(visibilityOfAllElements(btnsSelectFligths));
         click(btnsSelectFligths.get(i - 1));
-        if(getWait().until(not(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("[class='modal-inner']"))))){
+
+        if(getWait().until((Predicate<WebDriver>) ExpectedConditions.visibilityOf(getDriver().findElement(By.cssSelector("[class='modal-inner']")))){
             popup.ClickNoThanks();
         }
         return new FligthResultPage(getDriver());
