@@ -47,8 +47,6 @@ public abstract class GenericWebAutomationTest<T extends PageObjectBase> impleme
     }
 
     public void setUp(Browser browser) {
-        getLogger().debug(format("Creating instance of [%s] with browser [%s]...", getClass().getSimpleName(), browser));
-
         // Create the driver to inject into Page Object...
         WebDriver driver = new RemoteWebDriver(browser.getCapabilities());
         driver.manage().timeouts().implicitlyWait(1, SECONDS);
@@ -58,6 +56,7 @@ public abstract class GenericWebAutomationTest<T extends PageObjectBase> impleme
         // This is equal to: new PageObjectType(driver);
         Class<T> pageObjectType = getParameterizedType();
         try {
+            getLogger().debug(format("Creating instance of [%s] with browser [%s]...", pageObjectType.getSimpleName(), browser));
             this.startingPage = pageObjectType.getConstructor(WebDriver.class).newInstance(driver);
         } catch (Exception e) {
             getLogger().error(format("Could not instantiate Page Object [%s]...", pageObjectType.getName()), e);

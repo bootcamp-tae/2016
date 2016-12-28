@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class CheapTicketsHome extends PageObjectBase {
 
-    private static final String CHEAPTICKETS_URL = "http://www.cheaptickets.com";
+    private static final String CHEAPTICKETS_URL = "https://www.cheaptickets.com/";
 
     @FindBy(id = "tab-flight-tab")
     private WebElement flightTab;
@@ -24,5 +24,9 @@ public class CheapTicketsHome extends PageObjectBase {
     public FlightSearchForm clickOnFlightTab() {
         click(flightTab);
         return new FlightSearchForm(getDriver());
+    }
+
+    public boolean isVisible() {
+        return getDriver().getCurrentUrl().equals(CHEAPTICKETS_URL) && flightTab.isDisplayed();
     }
 }

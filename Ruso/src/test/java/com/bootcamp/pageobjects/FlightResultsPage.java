@@ -8,8 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElements;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 /**
  * @author Juan Krzemien
@@ -30,6 +29,7 @@ public class FlightResultsPage extends PageObjectBase {
 
     public FlightResultsPage selectDepartureFlight(int index) {
         selectFlight(index);
+        getWait().until(stalenessOf(selectButtons.get(index - 1)));
         return new FlightResultsPage(getDriver());
     }
 
@@ -67,5 +67,9 @@ public class FlightResultsPage extends PageObjectBase {
         if (flightPlusHotelPopUp.isVisible()) {
             flightPlusHotelPopUp.dismiss();
         }
+    }
+
+    public boolean isVisible() {
+        return getWait().until(visibilityOfAllElements(selectButtons)).size() > 0;
     }
 }
