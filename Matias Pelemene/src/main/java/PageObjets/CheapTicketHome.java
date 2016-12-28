@@ -18,9 +18,15 @@ public class CheapTicketHome extends PageObjectBase {
         super(driver);
     }
 
-    public CheapTicketHome(){
+    public CheapTicketHome() {
         driver.navigate().to("http://www.cheaptickets.com");
     }
+
+    public Boolean atHomePage() {
+        
+        return null;
+    }
+
     @FindBy(id="tab-flight-tab")
     private WebElement flightTab;
 
