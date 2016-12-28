@@ -21,7 +21,8 @@ public class SuiteJUnit {
         //INTRODUCE ORIGEN Y DESTINO, LAS VEGAS A LOS ANGELES
         FlightResultForm result = searchForm.doSearch("LAS", "LAX", 7, 7);
         //SELECCIONA EL 4TO RESULTADO
-        result.selectFlight(4);
+        result.selectFlight(4)
+                .selectFlight(2);
         //RE CHETO
     }
 }
