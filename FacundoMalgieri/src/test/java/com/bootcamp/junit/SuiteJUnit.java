@@ -22,8 +22,8 @@ public class SuiteJUnit extends WebAutomationJUnitSuite<CheapTickets> {
         CheapTickets home = getStartingPage();
         FlightSearch form = home.clickOnFlightTab();
         FlightResult result = form.doSearch("LAS", "LAX", 7, 9);
-        FlightResult result2 = result.selectFlight(4);
-        result2.selectFlight(2);
+        result.selectDepartureFlight(7)
+                .selectReturnFlight(7);
     }
 
 }

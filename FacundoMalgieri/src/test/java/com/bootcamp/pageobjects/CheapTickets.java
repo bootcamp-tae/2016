@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CheapTickets extends PageObjectBase {
-    private static final String CHEAPTICKETS_URL = "http://www.cheaptickets.com";
+    private static final String CHEAPTICKETS_URL = "https://www.cheaptickets.com/";
 
     @FindBy(id = "tab-flight-tab")
     private WebElement FlightTab;
@@ -22,4 +22,7 @@ public class CheapTickets extends PageObjectBase {
         return new FlightSearch(getDriver());
     }
 
+    public boolean isVisible() {
+        return getDriver().getCurrentUrl().equals(CHEAPTICKETS_URL) && exists(FlightTab);
+    }
 }

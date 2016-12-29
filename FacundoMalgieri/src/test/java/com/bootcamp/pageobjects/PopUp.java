@@ -26,4 +26,5 @@ public class PopUp extends PageObjectBase {
         return exists(this.modal);
     }
 
+
 }
