@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Set;
+import java.util.function.Consumer;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
 /**
@@ -25,6 +28,15 @@ public class ReviewTripPage extends PageObjectBase {
          */
         getWait().until(numberOfWindowsToBe(2));
         final String currentHandler = driver.getWindowHandle();
+
+        Set<String> win = driver.getWindowHandles();
+
+        for (String handler : win) {
+
+        }
+
+        win.forEach(String::isEmpty);
+
         driver.getWindowHandles().forEach(h -> {
             if (!h.equals(currentHandler) && !PAGE_TITLE.equals(getDriver().getTitle())) {
                 driver.switchTo().window(h);
