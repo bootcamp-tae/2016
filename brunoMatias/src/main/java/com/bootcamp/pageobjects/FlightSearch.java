@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FlightSearch extends Base {
+
     @FindBy(id = "flight-origin")
     private WebElement from;
 

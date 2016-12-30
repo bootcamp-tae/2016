@@ -19,7 +19,6 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 
 public class SuiteJUnit {
-
     private WebDriver browser;
 
     public SuiteJUnit (WebDriver browser) {
@@ -29,32 +28,32 @@ public class SuiteJUnit {
     @Parameterized.Parameters(name = "{}:[{0}]")
     public static Collection<Object[]> data() {
         ChromeDriverManager.getInstance().setup();
-        FirefoxDriverManager.getInstance().setup();
         return Arrays.asList(new Object[][]{
                 {new ChromeDriver()},
-                {new FirefoxDriver()}
-
         });
     }
 
     @Before
-    public void start () {
+    //this method maximize the window and browse to the chosen page
+    public void BeforeEach () {
+        browser.manage().window().maximize();
         browser.navigate().to("http://www.cheaptickets.com");
     }
 
     @After
-    public void finish () {
+    //this method finish the driver after each test
+    public void AfterEach () {
         browser.quit();
     }
 
     @Test
+    //this test open the CT page, clicks on the Flight Tab, completes the form with chosen data and finishes the operation
+    //IT'S AMAZING!
     public void FlightSearch() {
-
-        CheapTickets home   = new CheapTickets();
-        FlightSearch form   = home.clickOnFlightTab();
+        CheapTickets home = new CheapTickets();
+        FlightSearch form = home.clickOnFlightTab();
         FlightResult result = form.doSearch("LAS", "LAX", 7, 7);
-        result.selectFlight(4)
-                .selectFlight(2);
+        result.selectFlight(4).selectFlight(2);
     }
 
 

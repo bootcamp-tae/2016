@@ -4,10 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by Matias on 27/12/2016.
- */
-
 public class PopUp extends Base{
 
     @FindBy(id = "xSellHotelForcedChoice")
@@ -20,9 +16,11 @@ public class PopUp extends Base{
         return popUp.isDisplayed();
     }
 
-    public void popUpNo () { Click(noThanksButton); }
+    public void popUpNo ()
+    { Click(noThanksButton); }
 
-    public PopUp (WebDriver driver) { super(driver); }
+    public PopUp (WebDriver driver)
+    { super(driver); }
 
 
 }

@@ -13,22 +13,29 @@ import java.util.List;
 
 public class FlightResult extends Base {
 
+    //search the list of webelements with the chosen css
     @FindBy(css = "button[data-test-id='select-button']")
     private List<WebElement> buttons;
-
-    @FindBy(id = "FlightUDPBookNowButton1")
-    private WebElement continueBooking;
 
     public FlightResult(WebDriver driver) {
         super(driver);
     }
 
-    public FlightResult selectFlight(int p) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-
-        wait.until(ExpectedConditions.visibilityOfAllElements(buttons));
+    //this method click on the chosen button
+    private void selectFlight(int b) {
         Click(buttons.get(p));
+    }
 
+    public FlightResult departureFlight(int d) {
+        getWait().until(visibilityOfAllElements(buttons));
+        //wait and click
+        selectFlight(index);
         return new FlightResult(driver);
     }
+
+    public void returnFlight(int r){
+        getWait().until(visibilityOfAllElements(buttons));
+        selectFlight(index);
+    }
+
 }

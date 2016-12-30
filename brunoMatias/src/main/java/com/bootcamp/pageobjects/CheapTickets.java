@@ -7,18 +7,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheapTickets extends Base {
 
+    //with the BEFORE anotation, it's no necessary browse to the init page
+
+    //seach the Flight Tab element
     @FindBy(id = "tab-flight-tab")
     private WebElement FlightTab;
 
-    public CheapTickets() {
-        driver.navigate().to("http://www.cheaptickets.com");
+    //it's a beautiful constructor, isn't it?
+    public CheapTickets (WebDriver driver){
+        super(driver);
     }
 
+    //aaaaaand click on it!
     public FlightSearch clickOnFlightTab() {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(FlightTab));
         Click(FlightTab);
         return new FlightSearch(driver);
     }
-
 }

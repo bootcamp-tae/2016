@@ -12,20 +12,10 @@ abstract public class Base {
     protected WebDriver driver;
     private WebDriverWait wait;
 
-    public Base() {
-        if(driver == null) {
-            ChromeDriverManager.getInstance().setup();
-            driver = new ChromeDriver();
-            wait = getWait();
-        }
-        PageFactory.initElements(driver,this);
-    }
-
     public Base(WebDriver driver) {
         this.driver = driver;
         wait = getWait();
         PageFactory.initElements(driver,this);
-
     }
 
     protected WebDriverWait getWait(){
@@ -43,4 +33,14 @@ abstract public class Base {
         element.click();
     }
 
+    protected boolean Exists(WebElement element) {
+        try {
+            //wait to the visibility of element with a limit to ten seconds!
+            getWait().withTimeout(10, SECONDS).until(visibilityOf(element));
+            return true;
+        } catch (TimeoutException timeLimit) {
+            //if not, boolean Exists is false
+            return false;
+        }
+    }
 }
