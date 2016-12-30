@@ -1,11 +1,9 @@
 package com.bootcamp.pageobjects;
 
+import com.bootcamp.framework.web.PageObjectBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
@@ -14,20 +12,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class CheapTicketsHome extends PageObjectBase {
 
-
+    private static final String CHEAPTICKETS_URL = "http://www.cheaptickets.com";
 
     @FindBy(id="tab-flight-tab")
     private WebElement flightTab;
-    public CheapTicketsHome(){
-        driver.manage().window().maximize();
-        driver.navigate().to("https://www.cheaptickets.com/");
+
+    public CheapTicketsHome(WebDriver driver){
+        super(driver);
+        driver.navigate().to(CHEAPTICKETS_URL);
     }
     //id es tab-flight-tab
     public FlightSearchForm clickOnFlightTab() {
         click(flightTab);//clickea en la tab de flight
-        return new FlightSearchForm(driver);
+        return new FlightSearchForm(getDriver());
     }
-    public CheapTicketsHome(WebDriver driver){
-        super(driver);
-    }
+
 }

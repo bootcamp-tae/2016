@@ -1,16 +1,13 @@
 package com.bootcamp.pageobjects;
 
 
+import com.bootcamp.framework.web.PageObjectBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 
 /**
@@ -18,37 +15,47 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.*;
  */
 public class FlightSearchForm extends PageObjectBase{
 
-    @FindBy(id="flight-origin")
-        private WebElement originBox;
-    @FindBy(id="flight-destination")
-        private WebElement destinationBox;
-    @FindBy(id="flight-departing")
-        private WebElement departingBox;
-    @FindBy(id="flight-returning")
-        private WebElement returningBox;
-    @FindBy(id="search-button")
-        private WebElement searchBtn;
+    // Constants
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
+    @FindBy(id = "flight-origin")
+    private WebElement txtOrigin;
 
+    @FindBy(id = "flight-destination")
+    private WebElement txtDestination;
 
-    public FlightResultForm doSearch(String las, String lax, int c, int c1) {
-        type(originBox, las);
-        type(destinationBox, lax);
-        type(departingBox, this.fecha(c).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-        type(returningBox, this.fecha(c1).format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-        //formatea localdatetime a un string MM/dd/yyyy
-        click(searchBtn);
-        //llena cada campo con sus datos respectivos y clickea el boton Search
+    @FindBy(id = "flight-departing")
+    private WebElement txtDeparture;
 
-        return new FlightResultForm(driver);
-    }
-    public FlightSearchForm(WebDriver d){
-        super(d);
+    @FindBy(id = "flight-returning")
+    private WebElement txtReturn;
+
+    @FindBy(id = "search-button")
+    private WebElement btnSearch;
+
+    public FlightSearchForm(WebDriver driver) {
+        super(driver);
     }
 
+    public FlightResultForm doSearch(String origin, String destination, int daysTilTrip, int daysToStayOnDestination) {
 
-    private LocalDateTime fecha(int c){
-        return LocalDateTime.now().plusDays(c);
+        type(txtOrigin, origin);
+        type(txtDestination, destination);
+
+        LocalDateTime departDate = dateFromToday(daysTilTrip);
+        LocalDateTime returnDate = dateFromToday(daysTilTrip + daysToStayOnDestination);
+
+        type(txtDeparture, departDate.format(DATE_FORMAT));
+        type(txtReturn, returnDate.format(DATE_FORMAT));
+
+        click(btnSearch);
+
+        return new FlightResultForm(getDriver());
     }
 
+    private LocalDateTime dateFromToday(int plusDays) {
+        // today + <plusDays> days
+        return LocalDateTime.now().plusDays(plusDays);
+
+    }
 }

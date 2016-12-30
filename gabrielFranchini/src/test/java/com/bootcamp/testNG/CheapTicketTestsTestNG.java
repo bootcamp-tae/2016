@@ -1,8 +1,8 @@
-package com.bootcamp.testng;
+package com.bootcamp.testNG;
 
 import com.bootcamp.framework.runner.testng.WebAutomationTestNGSuite;
 import com.bootcamp.pageobjects.CheapTicketsHome;
-import com.bootcamp.pageobjects.FlightResultsPage;
+import com.bootcamp.pageobjects.FlightResultForm;
 import com.bootcamp.pageobjects.FlightSearchForm;
 import org.testng.annotations.Test;
 
@@ -19,7 +19,7 @@ public class CheapTicketTestsTestNG extends WebAutomationTestNGSuite<CheapTicket
 
         FlightSearchForm searchForm = home.clickOnFlightTab();
 
-        FlightResultsPage result = searchForm.doSearch("LAS", "LAX", 7, 7);
+        FlightResultForm result = searchForm.doSearch("LAS", "LAX", 7, 7);
 
         result.selectDepartureFlight(6)
                 .selectReturnFlight(3)

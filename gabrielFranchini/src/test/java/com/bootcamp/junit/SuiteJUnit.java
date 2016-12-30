@@ -1,28 +1,28 @@
 package com.bootcamp.junit;
 
+import com.bootcamp.framework.runner.junit.WebAutomationJUnitSuite;
 import com.bootcamp.pageobjects.CheapTicketsHome;
 import com.bootcamp.pageobjects.FlightResultForm;
 import com.bootcamp.pageobjects.FlightSearchForm;
 import org.junit.Test;
 
-
 /**
  * Created by Colegio on 19/12/2016.
  */
-public class SuiteJUnit {
+
+
+public class SuiteJUnit extends WebAutomationJUnitSuite<CheapTicketsHome> {
 
     @Test
-    public void flightSearch(){
+        public void flightSearch() {
+            CheapTicketsHome home = getStartingPage();
 
-        //ABRE CHROME Y NOS METE EN CHEAPTICKETS.COM
-        CheapTicketsHome home = new CheapTicketsHome();
-        //NOS METE EN LA TAB DE FLIGHT
-        FlightSearchForm searchForm = home.clickOnFlightTab();
-        //INTRODUCE ORIGEN Y DESTINO, LAS VEGAS A LOS ANGELES
-        FlightResultForm result = searchForm.doSearch("LAS", "LAX", 7, 7);
-        //SELECCIONA EL 4TO RESULTADO
-        result.selectFlight(4)
-                .selectFlight(2);
-        //RE CHETO
+            FlightSearchForm searchForm = home.clickOnFlightTab();
+
+            FlightResultForm result = searchForm.doSearch("LAS", "LAX", 7, 7);
+
+            result.selectDepartureFlight(6)
+                    .selectReturnFlight(3)
+                    .continueBooking();
+        }
     }
-}
